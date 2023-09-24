@@ -1,33 +1,23 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-        FileReader fileReader = null;
-        BufferedReader bufferedReader = null;
-        try {
-            fileReader = new FileReader("src/product list.csv");
-            bufferedReader = new BufferedReader(fileReader);
-            String line;
-            System.out.println("Список товарок");
-            bufferedReader.readLine();
-            while ((line = bufferedReader.readLine()) != null){
-                System.out.println(line);
-            }
-            bufferedReader.close();
-            fileReader.close();
-        }catch (IOException e){
-            try {
-                bufferedReader.close();
-                fileReader.close();
-            }catch (Exception ex){
-                System.out.println("Произошла ошибка");
-            }
-            throw new RuntimeException("Такой файл не найдет");
-        }
+        Scanner scanner = new Scanner(System.in);
 
+        ListUser listUser = new ListUser();
+
+        Utils.readFile(listUser, "src/UserList.csv");
+
+        System.out.println("Запишите логин");
+        String login = scanner.nextLine();
+        User.userLogin = login;
+
+        System.out.println("Запишите пароль");
+        String password = scanner.nextLine();
+
+        User User = new User(login, password);
+
+        System.out.println(User);
     }
 }
