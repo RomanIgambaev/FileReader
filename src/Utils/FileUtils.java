@@ -1,40 +1,39 @@
+package Utils;
+
+import Entity.List;
+import Entity.User;
+
 import java.io.*;
 
-public class Utils {
+public class FileUtils {
     static String[] getPartsOfLine(String line) {
         return line.split(",");
     }
 
-    public static void readFile(ListUser listUser, String fileName) {
+    public static void readFileUsers(List<User> listUser, String fileName) {
         FileReader fileReader = null;
         BufferedReader bufferedReader = null;
         try {
             fileReader = new FileReader(fileName);
             bufferedReader = new BufferedReader(fileReader);
 
-            bufferedReader.readLine();
-
             String line;
 
             while ((line = bufferedReader.readLine()) != null) {
-                String[] partsOfLine = Utils.getPartsOfLine(line);
+                String[] partsOfLine = getPartsOfLine(line);
 
-                User user = new User(partsOfLine[0], partsOfLine[1]);
-                listUser.insertUser(user);
+                User user = new User(partsOfLine[0], partsOfLine[1], partsOfLine[2],Integer.parseInt(partsOfLine[3]),partsOfLine[4].charAt(0));
+
+                listUser.insert(user);
             }
 
-            listUser.printUsers();
             bufferedReader.close();
             fileReader.close();
 
         } catch (IOException e) {
             try {
-                if (bufferedReader != null) {
-                    bufferedReader.close();
-                }
-                if (fileReader != null) {
-                    fileReader.close();
-                }
+                bufferedReader.close();
+                fileReader.close();
             } catch (Exception er) {
                 System.out.println("Произошла ошибка");
             }
@@ -42,14 +41,17 @@ public class Utils {
         }
     }
 
-    public static void writeDataToFile(ListUser listUser, String fileName) {
+
+
+
+    public static void writeDataToFile(List<User> listUser, String fileName) {
         FileWriter fileWriter = null;
         BufferedWriter bufferedWriter = null;
         try {
             fileWriter = new FileWriter(fileName);
             bufferedWriter = new BufferedWriter(fileWriter);
 
-            User[] users = listUser.getUsers();
+            User[] users = listUser.getAll();
 
             for (int i = 0; i < listUser.getSize(); i++) {
                 bufferedWriter.write(users[i] + "\n");
@@ -58,17 +60,6 @@ public class Utils {
             bufferedWriter.flush();
         } catch (IOException e) {
             throw new RuntimeException(e);
-        } finally {
-            try {
-                if (bufferedWriter != null) {
-                    bufferedWriter.close();
-                }
-                if (fileWriter != null) {
-                    fileWriter.close();
-                }
-            } catch (IOException e) {
-                System.out.println("Произошла ошибка при закрытии файла");
-            }
         }
     }
 }

@@ -1,4 +1,4 @@
-
+package Entity;
 
 public class Products {
     private int productId;
