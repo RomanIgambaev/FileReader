@@ -1,4 +1,4 @@
-package Entity;
+package sportshop.bootstrap.entity;
 
 import java.util.Arrays;
 import java.util.Iterator;

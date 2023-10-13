@@ -1,17 +1,19 @@
-import Entity.*;
-import Service.Login;
-import Utils.FileUtils;
+package sportshop.bootstrap;
+
+import sportshop.bootstrap.entity.*;
+import sportshop.bootstrap.service.Login;
+import sportshop.bootstrap.utils.FileUtils;
 
 import java.util.Scanner;
 
 public class Website {
 
-    static final List<User> users = new List<>(new User[10]);
+    static  List<User> users = new List<>(new User[10]);
     static final Scanner scanner = new Scanner(System.in);
     static final Login loginService = new Login(users);
 
     public static void runWebsite() {
-        FileUtils.readFileUsers(users, "src/UserList.csv");
+        users = FileUtils.readFile("src/UserList.csv");
 
         System.out.println("Добро пожаловать в интернет магазин спортивных товаров");
         System.out.println("Введите ваш логин и пароль:");
@@ -41,8 +43,8 @@ public class Website {
                 int age = Integer.parseInt(scanner.nextLine());
                 char sex = scanner.nextLine().charAt(0);
                 authenticatedUser.updateData(fullName,login,password,age,sex);
-
                 users.replaceElement(user,authenticatedUser);
+                FileUtils.writeDataToFile(users, "src/UserList.csv");
             }
         }
 

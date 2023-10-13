@@ -1,4 +1,4 @@
-package Entity;
+package sportshop.bootstrap.entity;
 
 public class Products {
     private int productId;

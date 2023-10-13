@@ -1,4 +1,4 @@
-package Entity;
+package sportshop.bootstrap.entity;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-package Entity;
+package sportshop.bootstrap.entity;
 
 public class Menu {
     public static void printMenu() {

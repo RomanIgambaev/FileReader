@@ -1,7 +1,7 @@
-package Service;
+package sportshop.bootstrap.service;
 
-import Entity.List;
-import Entity.User;
+import sportshop.bootstrap.entity.List;
+import sportshop.bootstrap.entity.User;
 
 public class Login {
     private List<User> listUser;
